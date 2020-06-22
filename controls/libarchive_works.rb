@@ -17,8 +17,9 @@ control 'core-plans-libarchive' do
 
   hab_pkg_path = command("hab pkg path #{plan_ident}")
   describe hab_pkg_path do
-    its('exit_status') { should eq 0 }
     its('stdout') { should_not be_empty }
+    its('stderr') { should be_empty }
+    its('exit_status') { should eq 0 }
   end
 
   bsdcat_exists = command("ls #{File.join(hab_pkg_path.stdout.strip, "/bin/bsdcat")}")
